@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Pí Interativa - atividade educacional de lógica para DSM 1º semestre de 2026 com o mascote oficial Pí Math.">
+    <title>Pí Interativa • Professor Pí Math 2026</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- CABEÇALHO SUPERIOR -->
+    <header class="cabecalho">
+        <div class="container cabecalho-conteudo">
+            <div class="cabecalho-titulos">
+                <h1>Pí Interativa</h1>
+                <p>Aprendendo lógica de um jeito simples, visual e divertido com o <strong>Pí Math</strong></p>
+            </div>
+            <div class="cabecalho-controles">
+                <button id="btnToggleSound" class="btn-top-util" title="Ativar/Desativar Efeitos Sonoros">
+                    <span id="soundIcon">🔊</span> <span id="soundLabel">Som: ON</span>
+                </button>
+                <button id="btnToggleVoice" class="btn-top-util" title="Ativar/Desativar Voz do Pí Math">
+                    <span id="voiceIcon">🗣️</span> <span id="voiceLabel">Voz: ON</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- APRESENTAÇÃO / HERO COM O PÍ MATH EM CORPO INTEIRO 3D -->
+        <section class="apresentacao" id="apresentacao-secao" data-section-name="apresentacao">
+            <div class="container apresentacao-conteudo">
+
+                <div class="apresentacao-texto">
+                    <span class="etiqueta">
+                        DSM • 2º semestre • 2026
+                    </span>
+
+                    <h2>
+                        Lógica fica melhor com o Professor <span class="destaque-pi">Pí Math!</span>
+                    </h2>
+
+                    <p>
+                        Aprenda <strong>E (&and;)</strong>, <strong>OU (&or;)</strong>, <strong>SE ENTÃO
+                            (&rarr;)</strong>,
+                        <strong>SE SOMENTE SE (&harr;)</strong> e <strong>NÃO (&not;)</strong> usando exemplos práticos,
+                        laboratório com lousa escolar, tabela-verdade dinâmica e um quiz com certificado oficial!
+                    </p>
+
+                    <div class="botoes">
+                        <button id="btnLaboratorio">
+                            Ir para o laboratório 🧪
+                        </button>
+
+                        <button id="btnPi" class="botao-claro">
+                            Cutucar o Pí 👋
+                        </button>
+                    </div>
+
+                    <div class="quick-status-pills">
+                        <span class="pill-info">💡 5 Operadores</span>
+                        <span class="pill-info">⚡ Feedback em Tempo Real</span>
+                        <span class="pill-info">🎓 Com Certificado Oficial</span>
+                    </div>
+                </div>
+
+
+                <!-- ÁREA DO PROFESSOR PÍ MATH: LIVRE DE CÍRCULOS, EM CORPO INTEIRO 3D -->
+                <div class="professor">
+
+                    <div class="balao" id="balaoHero">
+                        <div class="balao-topo">
+                            <strong>Professor Pí Math diz:</strong>
+                            <span class="badge-online">online ✨</span>
+                        </div>
+                        <p id="falaPi">
+                            Bora codar lógica? Passe o mouse sobre mim ou me cutuque para interagir!
+                        </p>
+                        <small id="contadorCaneca"></small>
+                        <div class="balao-micro-acoes">
+                            <button id="btnOuvirHero" class="btn-micro" title="Ouvir a fala">🔊 Ouvir</button>
+                            <button id="btnProximaDicaHero" class="btn-micro" title="Outra dica">💬 Outra dica</button>
+                        </div>
+                    </div>
+
+                    <!-- PALCO DO MASCOTE 3D (SEM CÍRCULO ENCLAUSURADOR) -->
+                    <div class="palco-mascote-hero" id="personagemPi" title="Clique no Professor Pí Math!">
+                        <div class="sombra-chao"></div>
+                        <img src="assets/pi_hero.png" alt="Professor Pí Math" id="imgPersonagemPi"
+                            class="pi-mascote-hero float-animation">
+                        <span class="badge-camiseta">DSM 1010</span>
+                    </div>
+
+                    <!-- CANECA DO PROFESSOR PÍ -->
+                    <button id="canecaPi" class="caneca" title="Clique 5 vezes para o Easter Egg!">
+                        ☕ <span id="textoCliquesCaneca">Caneca π (0/5)</span>
+                    </button>
+
+                    <p class="dica">
+                        Dica: clique 5 vezes na caneca π para um segredo matemático!
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- LABORATÓRIO -->
+        <section id="laboratorio" class="secao" data-section-name="laboratorio">
+            <div class="container">
+
+                <div class="titulo-secao">
+                    <div>
+                        <h2>Laboratório da Pí</h2>
+                        <p>
+                            Mude A e B e escolha uma operação lógica.
+                        </p>
+                    </div>
+
+                    <div class="resultado-topo">
+                        Resultado:
+                        <span id="resultado">
+                            0
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="laboratorio-grid">
+
+                    <!-- ENTRADAS -->
+                    <div class="painel painel-entradas">
+
+                        <h3>Entradas</h3>
+
+                        <div class="entrada">
+                            <label>
+                                A =
+                                <strong id="valorA">1</strong>
+                            </label>
+                            <button id="btnA">
+                                Alterar A (0 / 1)
+                            </button>
+                        </div>
+
+                        <div class="entrada" id="containerEntradaB">
+                            <label>
+                                B =
+                                <strong id="valorB">0</strong>
+                            </label>
+                            <button id="btnB">
+                                Alterar B (0 / 1)
+                            </button>
+                            <small id="avisoB"></small>
+                        </div>
+
+                        <h3 class="titulo-operacao">
+                            Operação Lógica
+                        </h3>
+
+                        <div class="operacoes">
+                            <button data-operacao="AND" class="ativo">
+                                E (&and;)
+                            </button>
+
+                            <button data-operacao="OR">
+                                OU (&or;)
+                            </button>
+
+                            <button data-operacao="SE_ENTAO">
+                                SE ENTÃO (&rarr;)
+                            </button>
+
+                            <button data-operacao="SE_SOMENTE_SE">
+                                SE SOMENTE SE (&harr;)
+                            </button>
+
+                            <button data-operacao="NOT" class="btn-op-not">
+                                NÃO (&not;)
+                            </button>
+                        </div>
+
+                    </div>
+
+
+                    <!-- EXPLICAÇÃO / LOUSA COM O PÍ MATH GRANDE E EXPRESSIVO -->
+                    <div class="painel painel-centro">
+
+                        <div class="lousa">
+                            <div class="lousa-header">
+                                <span class="lousa-autor">👨‍🏫 Lousa do Professor Pí Math</span>
+                                <span class="lousa-led" id="lousaLed"></span>
+                            </div>
+
+                            <div class="lousa-expressao" id="expressao">
+                                1 E 0 = 0
+                            </div>
+
+                            <div class="lousa-simbolos-aux" id="lousaFormulaFormal">
+                                1 &and; 0 = 0
+                            </div>
+                        </div>
+
+                        <div class="explicacao">
+                            <div class="explicacao-header">
+                                <img src="assets/pi_pensativo.png" alt="Pí Reagindo" id="imgLousaPi"
+                                    class="mini-pi-lousa">
+                                <div>
+                                    <strong>Pí Math explica:</strong>
+                                    <span class="explicacao-status" id="explicacaoStatus">Analisando...</span>
+                                </div>
+                            </div>
+                            <p id="explicacao">
+                                1 E 0 = 0. Para o E funcionar, os dois valores precisam ser 1.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- TABELA VERDADE -->
+                    <div class="painel painel-tabela">
+
+                        <div class="tabela-header-box">
+                            <h3>Tabela-verdade</h3>
+                            <p id="nomeOperacao">
+                                E (Conjunção)
+                            </p>
+                        </div>
+
+                        <div id="tabelaVerdade">
+                            <!-- Preenchido via JavaScript -->
+                        </div>
+
+                        <p class="regra" id="regraOperacao">
+                            E = 1 somente quando A=1 e B=1.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CHAT -->
+        <section id="chat" class="secao secao-clara" data-section-name="chat">
+            <div class="container">
+
+                <div class="titulo-secao">
+                    <div>
+                        <h2>Chat com a Pí</h2>
+                        <p>
+                            Digite os valores de A e B e escolha a operação para tirar dúvidas.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="chat">
+
+                    <div class="exemplos">
+                        <button data-exemplo="A=1 B=0">
+                            A=1 B=0
+                        </button>
+
+                        <button data-exemplo="A=1 B=1">
+                            A=1 B=1
+                        </button>
+
+                        <button data-exemplo="A=0 B=0">
+                            A=0 B=0
+                        </button>
+
+                        <button data-exemplo="A=0 B=1">
+                            A=0 B=1
+                        </button>
+
+                        <button data-exemplo="Por que 1 implica 0 é falso?">
+                            Por que 1 &rarr; 0 é falso?
+                        </button>
+                    </div>
+
+
+                    <div class="chat-campos">
+
+                        <input id="entradaChat" type="text" value="A=1 B=0"
+                            placeholder="Ex: A=1 B=0 ou 'Quanto é 1 OU 0?'">
+
+                        <select id="operacaoChat">
+                            <option value="AND">
+                                E (&and;)
+                            </option>
+                            <option value="OR">
+                                OU (&or;)
+                            </option>
+                            <option value="SE_ENTAO">
+                                SE ENTÃO (&rarr;)
+                            </option>
+                            <option value="SE_SOMENTE_SE">
+                                SE SOMENTE SE (&harr;)
+                            </option>
+                            <option value="NOT">
+                                NOT A (&not;)
+                            </option>
+                        </select>
+
+                    </div>
+
+
+                    <button id="btnPerguntar" class="botao-grande">
+                        Perguntar para a Pí 💬
+                    </button>
+
+
+                    <div class="resposta-chat">
+                        <div class="resposta-chat-header">
+                            <img src="assets/pi_hero.png" alt="Pí Avatar" id="imgChatPi" class="chat-avatar-mini">
+                            <div>
+                                <strong>Resposta da Pí Math</strong>
+                                <span class="chat-online-badge">online</span>
+                            </div>
+                        </div>
+                        <p id="respostaChat">
+                            Digite A e B e me pergunte! Estou pronta para te explicar cada detalhe da lógica!
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- QUIZ -->
+        <section id="quiz" class="secao" data-section-name="quiz">
+            <div class="container">
+
+                <div class="titulo-secao">
+                    <div>
+                        <h2>Quiz do Professor Pí</h2>
+                        <p>
+                            Teste o que você aprendeu com 6 cenários práticos.
+                        </p>
+                    </div>
+
+                    <div class="pontuacao">
+                        Pontuação
+                        <strong id="pontuacao">
+                            0/6
+                        </strong>
+                    </div>
+                </div>
+
+
+                <div id="areaQuiz" class="quiz">
+
+                    <div class="quiz-topo-etiquetas">
+                        <span id="numeroQuestao" class="etiqueta">
+                            1 / 6 • Login da Cantina
+                        </span>
+                        <span class="badge-quiz-tipo" id="tipoQuestaoTag">Cenário Prático</span>
+                    </div>
+
+                    <h3 id="tituloQuestao">
+                        Login da Cantina
+                    </h3>
+
+                    <p id="descricaoQuestao">
+                        Para entrar no app da cantina: A = matrícula válida e B = senha correta. Regra: A E B.
+                    </p>
+
+                    <p id="perguntaQuestao" class="pergunta">
+                        A=1 e B=1. Consegue entrar?
+                    </p>
+
+                    <div id="opcoesQuiz" class="opcoes">
+                        <!-- Botões preenchidos dinamicamente -->
+                    </div>
+
+                    <div id="feedbackQuiz" class="feedback hidden">
+                        <!-- Feedback preenchido dinamicamente -->
+                    </div>
+
+                    <button id="btnProxima" class="botao-grande hidden">
+                        Próxima →
+                    </button>
+
+                </div>
+
+
+                <!-- CERTIFICADO OFICIAL COM O PÍ MATH FORMANDO -->
+                <div id="certificado" class="certificado hidden" data-section-name="certificado">
+
+                    <div class="certificado-selo-topo">
+                        <img src="assets/pi_expert.png" alt="Professor Pí Formando" class="img-cert-expert">
+                    </div>
+
+                    <h2>
+                        Certificado de Lógica Proposicional
+                    </h2>
+
+                    <p class="cert-subtitulo">
+                        Aprovado pelo Professor Pí Math • DSM 2026
+                    </p>
+
+                    <div class="certificado-texto">
+
+                        <p class="cert-paragrafo">
+                            Certificamos que o(a) aluno(a) completou com sucesso todos os módulos do
+                            laboratório do <strong>Professor Pí Math</strong> com
+                            <strong id="notaFinal">6/6</strong>
+                            acertos.
+                        </p>
+
+                        <div class="cert-campo-aluno">
+                            <label for="nomeAlunoCertificado">Nome do Estudante:</label>
+                            <input type="text" id="nomeAlunoCertificado" value="Estudante Dedicado(a)"
+                                placeholder="Seu Nome Completo">
+                        </div>
+
+                        <p class="cert-emissao">
+                            Emitido oficialmente no 1º semestre de DSM • 2026.
+                        </p>
+
+                        <p class="codigo">
+                            SE (estudou lógica com Pí Math = 1) ENTÃO (passou na disciplina = 1) = 1 &rarr; 1 = 1 ✨
+                        </p>
+
+                    </div>
+
+                    <div class="cert-botoes-acao">
+                        <button id="btnImprimirCert" class="btn-imprimir">
+                            🖨️ Imprimir / Salvar PDF
+                        </button>
+
+                        <button id="btnRefazer">
+                            Refazer quiz
+                        </button>
+
+                        <button id="btnVoltarLab" class="botao-claro">
+                            Voltar ao laboratório
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- RODAPÉ -->
+    <footer>
+        <div class="container">
+            <p>
+                DSM 1º/2026 • Pí sempre interagindo • aprendendo lógica de forma simples, visual e divertida 💚
+            </p>
+        </div>
+    </footer>
+
+
+    <!-- MODAL EASTER EGG DA CANECA PI -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-caixa">
+            <img src="assets/pi_ideia.png" alt="Pí com Ideia" class="modal-pi-img">
+
+            <h2>
+                Easter Egg da Caneca π! ☕
+            </h2>
+
+            <p>
+                Você encontrou o segredo!
+                O número <strong>&pi; (Pi)</strong> começa com
+                <strong>3,1415926535...</strong> e possui infinitas
+                casas decimais.
+            </p>
+
+            <p class="modal-fato-extra">
+                💡 <strong>Você sabia?</strong> Em 1854, George Boole criou a álgebra booleana (0 e 1) que hoje move
+                todos os computadores e linguagens de programação do mundo!
+            </p>
+
+            <button id="fecharModal" class="botao-grande">
+                Fechar e continuar codando 🚀
+            </button>
+        </div>
+    </div>
+
+
+    <!-- NOVO: COMPANHEIRO DE NAVEGAÇÃO LIVRE 3D (SEM CÍRCULO ENCLAUSURADOR) -->
+    <div id="floatingPiWidget" class="floating-pi-companion">
+        <div class="floating-bubble" id="floatingBubble">
+            <div class="floating-bubble-header">
+                <span class="badge-section-track" id="floatingSectionTag">🧭 Início</span>
+                <span class="btn-close-bubble" id="btnCloseBubble" title="Fechar dica">&times;</span>
+            </div>
+            <p id="floatingBubbleText">Olá! Sou o Professor Pí Math, seu companheiro de estudos!</p>
+        </div>
+
+        <!-- O MASCOTE EM CORPO INTEIRO FLUTUANDO LIVRE NO CANTO INFERIOR -->
+        <div id="btnFloatingPi" class="floating-mascote-body" title="Clique no Professor Pí Math!">
+            <div class="companion-shadow"></div>
+            <img src="assets/pi_hero.png" alt="Pí Companheiro" id="imgFloatingPi"
+                class="floating-pi-character float-animation">
+        </div>
+    </div>
+
+    <!-- CANVAS PARA CONFETES -->
+    <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
